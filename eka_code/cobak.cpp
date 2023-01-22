@@ -4,9 +4,9 @@ using namespace std;
 
 float perkalian(float x, float y)
 {
-    int z;
-    z = x * y;
-    return z;
+    int a;
+    a = x * y;
+    return a;
 }
 
 int main(int argc, char const *argv[])
