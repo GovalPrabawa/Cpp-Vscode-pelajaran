@@ -29,7 +29,6 @@ bool isEmpty() // mengecek data apakah kosong
     }
 }
 
-
 void pushArray(string data) // menambahkan data
 {
     if (isFull() == true)
@@ -69,7 +68,7 @@ void displayArray()
         {
             if (arrayBuku[i] != "")
             {
-                cout << i+1 << ". " << arrayBuku[i] << endl;
+                cout << i + 1 << ". " << arrayBuku[i] << endl;
             }
         }
         cout << " \n " << endl;
@@ -143,7 +142,7 @@ int main(int argc, char const *argv[])
     // pushArray("Web");
     // displayArray();
 
-    cout << "mengurangi data" <<endl;
+    cout << "mengurangi data" << endl;
     // todo: mengurangi data
     popArray();
     displayArray();
@@ -161,7 +160,6 @@ int main(int argc, char const *argv[])
     cout << "Menghitung jumlah data yang ada" << endl;
     cout << "Banyak data : " << countArray() << endl;
 
-
     cout << endl;
     cout << "mengganti data yang ada" << endl;
     // todo: mengganti array
@@ -173,13 +171,12 @@ int main(int argc, char const *argv[])
     cout << endl;
     // menghapus semua data
     cout << "menghapus semua data" << endl;
-    destroyArray();
+    // destroyArray();
 
     cout << endl;
     cout << "Apakah data full ? : " << isFull() << endl;
     cout << "Apakah data kosong ? : " << isEmpty() << endl;
     displayArray();
-
 
     return 0;
 }
