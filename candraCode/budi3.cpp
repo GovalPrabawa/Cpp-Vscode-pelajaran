@@ -58,6 +58,7 @@ void bubble_sort()
     }
     cout << endl;
 }
+
 void tampil_array(int nilai[], int panjang)
 {
     int index;
