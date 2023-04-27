@@ -14,7 +14,7 @@
   "tabnine.experimentalAutoImports": true,
   "editor.formatOnSave": true,
   "code-runner.runInTerminal": true,
-  "workbench.colorTheme": "Atom One Dark",
+  "workbench.colorTheme": "Dracula",
   "workbench.editorAssociations": {
     "*.bin": "default"
   },
@@ -150,5 +150,6 @@
   "C_Cpp.codeAnalysis.clangTidy.checks.disabled": [
     "clang-diagnostic-error"
   ],
-  "C_Cpp_Runner.useAddressSanitizer": false
+  "C_Cpp_Runner.useAddressSanitizer": false,
+  "C_Cpp_Runner.showCompilationTime": false
 }
