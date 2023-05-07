@@ -122,17 +122,6 @@ void dequeueArray()
             }
         }
         back--;
-        // for (int i = 0; i < back; i++)
-        // {
-        //     antrianAtm[i] = antrianAtm[i + 1];
-        // }
-        // back--;
-
-        // antrianAtm[0] = antrianAtm[1];
-        // antrianAtm[1] = antrianAtm[2];
-        // antrianAtm[2] = antrianAtm[3];
-        // antrianAtm[3] = antrianAtm[4];
-        // antrianAtm[4] = "";
     }
 }
 
@@ -189,5 +178,9 @@ int main(int argc, char const *argv[])
 
     cout << isFullArray() << endl;
     cout << isEmptyArray() << endl;
+
+    enqueueArray("10");
+    viewArray();
+
     return 0;
 }
