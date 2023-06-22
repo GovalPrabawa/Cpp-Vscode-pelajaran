@@ -1,9 +1,12 @@
 #include <iostream>
 // #include <string>
+
+// maksimal antrian adalah 5
 #define MAX_QUEUE 5
 
 using namespace std;
 
+// buat struct KTP untuk menyimpan data data yang ada pada ktp
 struct KTP
 {
     string NIK;
@@ -13,6 +16,7 @@ struct KTP
     string pekerjaan;
 };
 
+// kemudian buat struct qiuiu untuk menyiapkan array yaitu KTP. lalu menyiapkan variabel head dan tail. KTP adalah struct array yang banyak datanyaa tergantung dari berapa jumlah MAX_QUEUE yang di set
 struct Queue
 {
     KTP data[MAX_QUEUE];
@@ -22,6 +26,7 @@ struct Queue
 
 Queue antrian;
 
+// PROTOTYPE FUNCTION (agar fungsi dapat ditaruh pada bagiaan bawah main function. Jika fungsi ditaruh dibawah tidak akan dapat dibaca jika program dicompiler)
 // todo : inisiasi
 void inisiasi();
 
@@ -47,7 +52,7 @@ void search(string posisi);
 
 int main(int argc, char const *argv[])
 {
-    // jalankan prosedur agar head dan tail di set ke -1
+    // inisiasi agar head dan tail di set ke -1
     inisiasi();
 
     // deklarasikan variabel yang dibutuhkan
@@ -62,6 +67,7 @@ int main(int argc, char const *argv[])
     // while digunakan agar program tak berhenti kecuali keinginan oleh pengguna
     while (true)
     {
+        // kami menggunakan getline karena getline karena inputan yang lebih dari 1 kata
         cout << endl;
         cout << "==========Program Queue=========" << endl;
         cout << "1. Enqueue/menambahkan data KTP" << endl;
@@ -71,15 +77,17 @@ int main(int argc, char const *argv[])
         cout << "5. Cari data" << endl;
         cout << "6. Exit" << endl;
         cout << "pilih menu (1/2/3/4/5) : ";
-        //  getline digunakan untuk menangkap
+        //  getline digunakan untuk menangkap menu yang dipilih oleh user
         getline(cin, menu);
 
+        // kami tidak  menggunakan switch case karena terjadi  error pada  inputan menu,  karena mungin disebabkan oleh  fungsi  getline(kayaknya) karena pada saat menggunakan cin >> menu, variabel setelah penginputan menu terjadi bug dimana nik yang harusnya bisa diisi data malah terlewatkan dan langsung mengisi ke variabel nama jika user memilih menu no 1. maka dari itu, untuk  menghilangkan/memperbaiki bug, kami mencoba if else untuk program menu untuk user. Bug yang sama juga terjadi pada menu no 5 yaitu mencari data. dimana juga kejadiannya sama.Maka dari itu kami menggunakan fungsi getline untuk menerima dan menyimpan inputan user ke variabel, dan setelah itu bug tidak terjadi lagi
         if (menu == "1")
         {
             // cek jika data penuh
-            if (isFull())
+            if (isFull() == 1) // cek jika data telah penuh
             {
                 // jika data penuh maka beritahu user
+                cout << endl;
                 cout << " ***** Data Penuh *****" << endl;
             }
             else
@@ -113,7 +121,9 @@ int main(int argc, char const *argv[])
         else if (menu == "5")
         {
             cout << "Cari data ke- ? : ";
+            // baca inputan nomer posisi data yang dimasukan user dgn fungsi getline()
             getline(cin, posisi);
+            // kemudian variabel posisi ditaruh sebagai parameter pada fungsi search
             search(posisi);
         }
         else if (menu == "6")
