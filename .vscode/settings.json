@@ -14,7 +14,7 @@
   "tabnine.experimentalAutoImports": true,
   "editor.formatOnSave": true,
   "code-runner.runInTerminal": true,
-  "workbench.colorTheme": "Dracula",
+  "workbench.colorTheme": "Midnight Synth",
   "workbench.editorAssociations": {
     "*.bin": "default"
   },
