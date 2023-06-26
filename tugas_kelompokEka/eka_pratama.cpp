@@ -244,7 +244,7 @@ void enQueue(string NIK, string nama, string tanggalLahir, string status, string
         antrian.data[antrian.tail].asal = asal;
     }
     // jika data penuh maka beritahu user
-    cout << "***** data sudah ditambahkan *****" << endl;
+    cout << "|*****| Data sudah ditambahkan |*****|" << endl;
     cout << endl;
 }
 
@@ -255,7 +255,7 @@ void deQueue()
     {
         cout << endl;
         // tampilkan ke layar bahawa data masih kosong
-        cout << " ***** Data kosong ***** " << endl;
+        cout << " |*****| Data kosong |*****|" << endl;
     }
     // jika data tidak kosong
     else
@@ -276,7 +276,7 @@ void deQueue()
 
         cout << endl;
         // setelah cetak bahwa data berhasil dihapus ke layar
-        cout << "***** Data dihapus *****" << endl;
+        cout << "|*****| Data dihapus |*****|" << endl;
     }
 
     cout << endl;
@@ -314,7 +314,7 @@ void printData()
     {
         cout << endl;
         // tampilkan ke layar bahwa data kosong
-        cout << "***** Data kosong *****" << endl;
+        cout << "|*****| Data kosong |*****|" << endl;
     }
     cout << endl;
 }
@@ -327,7 +327,7 @@ void clear()
     {
         cout << endl;
         // tampilkan di layar bahwa data kosong
-        cout << "**** Data kosong *****" << endl;
+        cout << "|*****| Data kosong |*****|" << endl;
     }
     // jika ada data
     else
@@ -335,7 +335,7 @@ void clear()
         // set head dan tail = -1 agar seluruh data terhapus
         antrian.head = antrian.tail = -1;
         // lalu cetak data telah dikosongkan, ke user bahwa data telah terhapus semuanya
-        cout << " ***** Data telah dikosongkan ****** " << endl;
+        cout << "|*****| Data telah dikosongkan |******|" << endl;
     }
     cout << endl;
 }
@@ -372,7 +372,7 @@ void search(string posisi)
     if (found == false)
     {
         // maka dari itu cetak DATA NOT FOUND, agar user tahu jika data yang ia inginkan tidak ditemukan
-        cout << "***** DATA NOT FOUND *****" << endl;
+        cout << "|*****| DATA NOT FOUND |*****|" << endl;
     }
     cout << endl;
 }
