@@ -228,6 +228,7 @@ void deQueue()
             antrian.data[i].tanggalLahir = antrian.data[i + 1].tanggalLahir;
             antrian.data[i].perkawinan = antrian.data[i + 1].perkawinan;
             antrian.data[i].pekerjaan = antrian.data[i + 1].pekerjaan;
+            antrian.data[i].asal = antrian.data[i + 1].asal;
         }
         // kemudian set tail kurang 1 agar berpindah ke belakang pada data terakhir
         antrian.tail--;
@@ -264,6 +265,7 @@ void printData()
             cout << "Tanggal lahir: " << antrian.data[i].tanggalLahir << endl;
             cout << "Status perkawinan: " << antrian.data[i].perkawinan << endl;
             cout << "Pekerjaan: " << antrian.data[i].pekerjaan << endl;
+            cout << "Asal : " << antrian.data[i].asal << endl;
             cout << endl;
         }
     }

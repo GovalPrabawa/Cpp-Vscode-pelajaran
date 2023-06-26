@@ -6,26 +6,27 @@
 using namespace std;
 
 // buat struct KTP untuk menyimpan data data yang ada pada ktp
-struct KTP
+struct Penduduk
 {
     string NIK;
     string nama;
     string tanggalLahir;
-    string perkawinan;
+    string status;
     string pekerjaan;
+    string asal;
 };
 
-// kemudian buat struct qiuiu untuk menyiapkan array yaitu KTP. lalu menyiapkan variabel head dan tail. KTP adalah struct array yang banyak datanyaa tergantung dari berapa jumlah MAX_QUEUE yang di set
+// kemudian buat struct qiuiu untuk menyiapkan array yaitu Penduduk. lalu menyiapkan variabel head dan tail. Penduduk adalah struct array yang banyak datanyaa tergantung dari berapa jumlah MAX_QUEUE yang di set
 struct Queue
 {
-    KTP data[MAX_QUEUE];
+    Penduduk data[MAX_QUEUE];
     int head;
     int tail;
 };
 
 Queue antrian;
 
-// PROTOTYPE FUNCTION (agar fungsi dapat ditaruh pada bagiaan bawah main function. Jika fungsi ditaruh dibawah tidak akan dapat dibaca jika program dicompiler)
+// PROTOTYPE FUNCTION (agar fungsi dapat ditaruh pada bagian bawah main function. Jika fungsi ditaruh dibawah tidak akan dapat dibaca jika program dicompiler)
 // todo : inisiasi
 void inisiasi();
 
@@ -35,7 +36,7 @@ int isEmpty();
 // todo : mengecek data jika sudah penuh
 int isFull();
 
-void enQueue(string NIK, string nama, string tanggalLahir, string perkawinan, string pekerjaan);
+void enQueue(string NIK, string nama, string tanggalLahir, string status, string pekerjaan, string asal);
 
 // todo : menghapus satu data antrian terdepan
 void deQueue();
@@ -81,10 +82,11 @@ int main(int argc, char const *argv[])
     string NIK;
     string nama;
     string tanggalLahir;
-    string perkawinan;
+    string status;
     string pekerjaan;
     string menu;
     string posisi;
+    string asal;
 
     // while digunakan agar program tak berhenti kecuali keinginan oleh pengguna
     while (true)
@@ -103,9 +105,12 @@ int main(int argc, char const *argv[])
         //  getline digunakan untuk menangkap menu yang dipilih oleh user
         getline(cin, menu);
 
+        // note : penggunaan getline digunakan untuk menangkap variabel string yang lebih dari 1 kata. untuk menu sendiri juga menggunakan getline karena, jika menggunakan cin, terdapat error saat input data dari user. yaitu variabel nik tidak bisa diisi dan langsung ke variabel nama. untukk mengatasi error tersebut semua  inputan dari user sya menggunakan fungsi getline(). Error kemudian bisa saya hilangkkan
+
+        // ubah isi variabel menu dari string menjadi integer dan masukan ke variabel pilihan dengan type data integer. karena jika menggunakan variabel menu yang bertipe string dengan fungsi inputan menggunakan fungsi getline(), juga terjadi error. makanya saya parsing dahulu  dari string ke int dengan fungsi stoi.
+        // fungsi stoi digunakan untuk mengubah string menjadi integer.
         int pilihan = stoi(menu);
 
-        // kami tidak  menggunakan switch case karena terjadi  error pada  inputan menu,  karena mungin disebabkan oleh  fungsi  getline(kayaknya) karena pada saat menggunakan cin >> menu, variabel setelah penginputan menu terjadi bug dimana nik yang harusnya bisa diisi data malah terlewatkan dan langsung mengisi ke variabel nama jika user memilih menu no 1. maka dari itu, untuk  menghilangkan/memperbaiki bug, kami mencoba if else untuk program menu untuk user. Bug yang sama juga terjadi pada menu no 5 yaitu mencari data. dimana juga kejadiannya sama.Maka dari itu kami menggunakan fungsi getline untuk menerima dan menyimpan inputan user ke variabel, dan setelah itu bug tidak terjadi lagi.
         // jika user memilih menu no 1
 
         switch (pilihan)
@@ -116,7 +121,7 @@ int main(int argc, char const *argv[])
             {
                 // jika data penuh maka beritahu user
                 cout << endl;
-                cout << " ***** Data Penuh *****" << endl;
+                cout << " |*****| Data Penuh |*****|" << endl;
             }
             else
             {
@@ -126,13 +131,15 @@ int main(int argc, char const *argv[])
                 getline(cin, nama);
                 cout << "Tanggal lahir: ";
                 getline(cin, tanggalLahir);
-                cout << "Status perkawinan: ";
-                getline(cin, perkawinan);
-                cout << "pekerjaan: ";
+                cout << "Status : ";
+                getline(cin, status);
+                cout << "Pekerjaan: ";
                 getline(cin, pekerjaan);
+                cout << "Asal Daerah: ";
+                getline(cin, asal);
 
                 // menjalankan fungsi enQueue / memasukan semua variabel yang telah diisi input user ke dalam parameter enQueue
-                enQueue(NIK, nama, tanggalLahir, perkawinan, pekerjaan);
+                enQueue(NIK, nama, tanggalLahir, status, pekerjaan, asal);
             }
             break;
 
@@ -152,7 +159,7 @@ int main(int argc, char const *argv[])
             break;
         case 5:
             cout << "Cari data ke- ? : ";
-            // baca inputan nomer posisi data yang dimasukan user dgn fungsi getline()
+            // baca inputan nomer posisi data yang dimasukkan user dgn fungsi getline()
             getline(cin, posisi);
             // kemudian variabel posisi ditaruh sebagai parameter pada fungsi search
             search(posisi);
@@ -162,7 +169,7 @@ int main(int argc, char const *argv[])
             cout << "Jumlah data :  " << totalData();
             break;
         case 7:
-            cout << "THANKS YOU, HAVE A NICE DAY ";
+            cout << "THANK YOU, HAVE A NICE DAY ";
             // keluar dari program
             exit(0);
             break;
@@ -210,7 +217,7 @@ int isFull()
     }
 }
 
-void enQueue(string NIK, string nama, string tanggalLahir, string perkawinan, string pekerjaan)
+void enQueue(string NIK, string nama, string tanggalLahir, string status, string pekerjaan, string asal)
 {
     // jika antrian masih kosong dan ditambahkan data pertama
     if (isEmpty()) // cek jika data kosong
@@ -220,8 +227,9 @@ void enQueue(string NIK, string nama, string tanggalLahir, string perkawinan, st
         antrian.data[antrian.tail].NIK = NIK;
         antrian.data[antrian.tail].nama = nama;
         antrian.data[antrian.tail].tanggalLahir = tanggalLahir;
-        antrian.data[antrian.tail].perkawinan = perkawinan;
+        antrian.data[antrian.tail].status = status;
         antrian.data[antrian.tail].pekerjaan = pekerjaan;
+        antrian.data[antrian.tail].asal = asal;
     }
     // jika antrian terdapat data
     else
@@ -231,8 +239,9 @@ void enQueue(string NIK, string nama, string tanggalLahir, string perkawinan, st
         antrian.data[antrian.tail].NIK = NIK;
         antrian.data[antrian.tail].nama = nama;
         antrian.data[antrian.tail].tanggalLahir = tanggalLahir;
-        antrian.data[antrian.tail].perkawinan = perkawinan;
+        antrian.data[antrian.tail].status = status;
         antrian.data[antrian.tail].pekerjaan = pekerjaan;
+        antrian.data[antrian.tail].asal = asal;
     }
     // jika data penuh maka beritahu user
     cout << "***** data sudah ditambahkan *****" << endl;
@@ -258,8 +267,9 @@ void deQueue()
             antrian.data[i].NIK = antrian.data[i + 1].NIK;
             antrian.data[i].nama = antrian.data[i + 1].nama;
             antrian.data[i].tanggalLahir = antrian.data[i + 1].tanggalLahir;
-            antrian.data[i].perkawinan = antrian.data[i + 1].perkawinan;
+            antrian.data[i].status = antrian.data[i + 1].status;
             antrian.data[i].pekerjaan = antrian.data[i + 1].pekerjaan;
+            antrian.data[i].asal = antrian.data[i + 1].asal;
         }
         // kemudian set tail kurang 1 agar berpindah ke belakang pada data terakhir
         antrian.tail--;
@@ -293,8 +303,9 @@ void printData()
             cout << "NIK: " << antrian.data[i].NIK << endl;
             cout << "Nama: " << antrian.data[i].nama << endl;
             cout << "Tanggal lahir: " << antrian.data[i].tanggalLahir << endl;
-            cout << "Status perkawinan: " << antrian.data[i].perkawinan << endl;
+            cout << "Status status: " << antrian.data[i].status << endl;
             cout << "Pekerjaan: " << antrian.data[i].pekerjaan << endl;
+            cout << "Asal : " << antrian.data[i].asal << endl;
             cout << endl;
         }
     }
@@ -336,7 +347,7 @@ void search(string posisi)
     // deklarasikan variabel yang dibutuhkan
     bool found = false;
 
-    // ubah variabel posisi dari string menjadi integer
+    // ubah isi variabel posisi dari string menjadi integer dan masukan ke angka
     int angka = stoi(posisi); // stoi adalah fungsi untuk mengubah angka string menjadi integer
 
     // laukakan perulangan untuk nantinya digunakan mencari data yang user inginkan
@@ -352,8 +363,9 @@ void search(string posisi)
             cout << "NIK: " << antrian.data[i].NIK << endl;
             cout << "Nama: " << antrian.data[i].nama << endl;
             cout << "Tanggal lahir: " << antrian.data[i].tanggalLahir << endl;
-            cout << "Status perkawinan: " << antrian.data[i].perkawinan << endl;
+            cout << "Status status: " << antrian.data[i].status << endl;
             cout << "Pekerjaan: " << antrian.data[i].pekerjaan << endl;
+            cout << "Asal: " << antrian.data[i].asal << endl;
         }
     }
     // jika data yang dicari tidak ditemukan makaa found akan tetap bernilai false
