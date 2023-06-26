@@ -1,5 +1,4 @@
 #include <iostream>
-// #include <string>
 
 // maksimal antrian adalah 5
 #define MAX_QUEUE 5
@@ -80,7 +79,8 @@ int main(int argc, char const *argv[])
         //  getline digunakan untuk menangkap menu yang dipilih oleh user
         getline(cin, menu);
 
-        // kami tidak  menggunakan switch case karena terjadi  error pada  inputan menu,  karena mungin disebabkan oleh  fungsi  getline(kayaknya) karena pada saat menggunakan cin >> menu, variabel setelah penginputan menu terjadi bug dimana nik yang harusnya bisa diisi data malah terlewatkan dan langsung mengisi ke variabel nama jika user memilih menu no 1. maka dari itu, untuk  menghilangkan/memperbaiki bug, kami mencoba if else untuk program menu untuk user. Bug yang sama juga terjadi pada menu no 5 yaitu mencari data. dimana juga kejadiannya sama.Maka dari itu kami menggunakan fungsi getline untuk menerima dan menyimpan inputan user ke variabel, dan setelah itu bug tidak terjadi lagi
+        // kami tidak  menggunakan switch case karena terjadi  error pada  inputan menu,  karena mungin disebabkan oleh  fungsi  getline(kayaknya) karena pada saat menggunakan cin >> menu, variabel setelah penginputan menu terjadi bug dimana nik yang harusnya bisa diisi data malah terlewatkan dan langsung mengisi ke variabel nama jika user memilih menu no 1. maka dari itu, untuk  menghilangkan/memperbaiki bug, kami mencoba if else untuk program menu untuk user. Bug yang sama juga terjadi pada menu no 5 yaitu mencari data. dimana juga kejadiannya sama.Maka dari itu kami menggunakan fungsi getline untuk menerima dan menyimpan inputan user ke variabel, dan setelah itu bug tidak terjadi lagi.
+        // jika user memilih menu no 1
         if (menu == "1")
         {
             // cek jika data penuh
@@ -103,19 +103,24 @@ int main(int argc, char const *argv[])
                 cout << "pekerjaan: ";
                 getline(cin, pekerjaan);
 
+                // menjalankan fungsi enQueue / memasukan semua variabel yang telah diisi input user ke dalam parameter enQueue
                 enQueue(NIK, nama, tanggalLahir, perkawinan, pekerjaan);
             }
         }
+        // jika user memilih
         else if (menu == "2")
         {
+            // menjalankan fungsi dequeue/ menghapus data
             deQueue();
         }
         else if (menu == "3")
         {
+            // menampilkan seluruh data pada antrian
             printData();
         }
         else if (menu == "4")
         {
+            // menghapus seluruh data pada antrian
             clear();
         }
         else if (menu == "5")
@@ -246,6 +251,7 @@ void printData()
         cout << "========================" << endl;
         cout << "======= Data KTP =======" << endl;
         cout << "========================" << endl;
+        cout << endl;
 
         // dengan for loop, ddari data yang ada di head/data pertama sampai data yang ada pada tail/ data terakhir. Tampilkan seluruh data ke layar
         for (int i = antrian.head; i <= antrian.tail; i++)

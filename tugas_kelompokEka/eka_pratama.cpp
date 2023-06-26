@@ -1,5 +1,4 @@
 #include <iostream>
-// #include <string>
 
 // maksimal antrian adalah 5
 #define MAX_QUEUE 5
@@ -44,12 +43,35 @@ void deQueue();
 // todo : menampilkan ke layar data yang telah dibuat
 void printData();
 
-// todo menghapus seluruh data
+// todo : menghapus seluruh data
 void clear();
 
-// todo mencari data berdasarkan no
+// todo : mencari data berdasarkan no
 void search(string posisi);
 
+// todo : menghitung total data pada antrian
+int totalData()
+{
+    // variabel total digunakan untuk menghitung total data pada antrian.
+    int total = 0;
+
+    if (antrian.head = antrian.tail == -1) // jika antrian kosong yaitu head dan tail = -1
+    {
+        return total = 0; // maka kembalikan data total = 0
+    }
+    // jika  antrian terdapat data antrian  maka
+    else
+    {
+        // buat perulangan untuk mengitung data, gunakan perulangan for untuk menghitung data pada antrian dimana head sebagai data pertama dan tail  sebagai data terakhir
+        for (int i = antrian.head; i <= antrian.tail; i++)
+        {
+            // variabel total tambahkan 1
+            total += 1;
+        }
+        // kembalikan nilai total
+        return total;
+    }
+}
 int main(int argc, char const *argv[])
 {
     // inisiasi agar head dan tail di set ke -1
@@ -75,14 +97,20 @@ int main(int argc, char const *argv[])
         cout << "3. Print data KTP" << endl;
         cout << "4. Hapus seluruh data" << endl;
         cout << "5. Cari data" << endl;
-        cout << "6. Exit" << endl;
+        cout << "6. Jumlah data" << endl;
+        cout << "7. Exit" << endl;
         cout << "pilih menu (1/2/3/4/5) : ";
         //  getline digunakan untuk menangkap menu yang dipilih oleh user
         getline(cin, menu);
 
-        // kami tidak  menggunakan switch case karena terjadi  error pada  inputan menu,  karena mungin disebabkan oleh  fungsi  getline(kayaknya) karena pada saat menggunakan cin >> menu, variabel setelah penginputan menu terjadi bug dimana nik yang harusnya bisa diisi data malah terlewatkan dan langsung mengisi ke variabel nama jika user memilih menu no 1. maka dari itu, untuk  menghilangkan/memperbaiki bug, kami mencoba if else untuk program menu untuk user. Bug yang sama juga terjadi pada menu no 5 yaitu mencari data. dimana juga kejadiannya sama.Maka dari itu kami menggunakan fungsi getline untuk menerima dan menyimpan inputan user ke variabel, dan setelah itu bug tidak terjadi lagi
-        if (menu == "1")
+        int pilihan = stoi(menu);
+
+        // kami tidak  menggunakan switch case karena terjadi  error pada  inputan menu,  karena mungin disebabkan oleh  fungsi  getline(kayaknya) karena pada saat menggunakan cin >> menu, variabel setelah penginputan menu terjadi bug dimana nik yang harusnya bisa diisi data malah terlewatkan dan langsung mengisi ke variabel nama jika user memilih menu no 1. maka dari itu, untuk  menghilangkan/memperbaiki bug, kami mencoba if else untuk program menu untuk user. Bug yang sama juga terjadi pada menu no 5 yaitu mencari data. dimana juga kejadiannya sama.Maka dari itu kami menggunakan fungsi getline untuk menerima dan menyimpan inputan user ke variabel, dan setelah itu bug tidak terjadi lagi.
+        // jika user memilih menu no 1
+
+        switch (pilihan)
         {
+        case 1:
             // cek jika data penuh
             if (isFull() == 1) // cek jika data telah penuh
             {
@@ -103,37 +131,46 @@ int main(int argc, char const *argv[])
                 cout << "pekerjaan: ";
                 getline(cin, pekerjaan);
 
+                // menjalankan fungsi enQueue / memasukan semua variabel yang telah diisi input user ke dalam parameter enQueue
                 enQueue(NIK, nama, tanggalLahir, perkawinan, pekerjaan);
             }
-        }
-        else if (menu == "2")
-        {
+            break;
+
+        case 2:
+            // menjalankan fungsi dequeue/ menghapus data
             deQueue();
-        }
-        else if (menu == "3")
-        {
+            break;
+
+        case 3:
+            // menampilkan seluruh data pada antrian
             printData();
-        }
-        else if (menu == "4")
-        {
+            break;
+
+        case 4:
+            // menghapus seluruh data pada antrian
             clear();
-        }
-        else if (menu == "5")
-        {
+            break;
+        case 5:
             cout << "Cari data ke- ? : ";
             // baca inputan nomer posisi data yang dimasukan user dgn fungsi getline()
             getline(cin, posisi);
             // kemudian variabel posisi ditaruh sebagai parameter pada fungsi search
             search(posisi);
-        }
-        else if (menu == "6")
-        {
+            break;
+        case 6:
+            // menghitung jumlah data pada antrian
+            cout << "Jumlah data :  " << totalData();
+            break;
+        case 7:
             cout << "THANKS YOU, HAVE A NICE DAY ";
+            // keluar dari program
             exit(0);
-        }
-        else
-        {
-            cout << "Input menu yang ansa masukan tidak tersedia..." << endl;
+            break;
+
+        default:
+            // jika user memilih selain menu diatas
+            cout << "Input menu yang anda masukan tidak tersedia..." << endl;
+            break;
         }
     }
     cout << "endl" << endl;
