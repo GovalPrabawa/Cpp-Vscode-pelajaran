@@ -346,7 +346,7 @@ void search(string posisi)
         if (angka - 1 == i)
         {
             // set bool = true,
-            bool found = true;
+            found = true;
 
             // lalu tampilkan data dengan index ke-i tersebut. karena i tersebut adalah data yang dicari oleh user sesuai parameter yang dikirim
             cout << "NIK: " << antrian.data[i].NIK << endl;
