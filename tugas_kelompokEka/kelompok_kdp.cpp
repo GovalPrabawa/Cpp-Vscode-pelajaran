@@ -1,7 +1,7 @@
 #include <iostream>
 
 // maksimal antrian adalah 5
-#define MAX_QUEUE 5
+#define MAX_QUEUE 2
 
 using namespace std;
 
@@ -220,7 +220,7 @@ void deQueue()
     else
     {
         // gunakan for loop untuk membantu mmenghapus data pada antrian pertama
-        for (int i = antrian.head; i <= antrian.tail; i++)
+        for (int i = antrian.head; i <= antrian.tail - 1; i++)
         {
             // data pada index satu akan digantikan oleh data pada index kedua, data pada idex kedua akan digantikan oleh index ke tiga dan seterusnya
             antrian.data[i].NIK = antrian.data[i + 1].NIK;
@@ -228,14 +228,9 @@ void deQueue()
             antrian.data[i].tanggalLahir = antrian.data[i + 1].tanggalLahir;
             antrian.data[i].perkawinan = antrian.data[i + 1].perkawinan;
             antrian.data[i].pekerjaan = antrian.data[i + 1].pekerjaan;
-            antrian.data[i].asal = antrian.data[i + 1].asal;
         }
         // kemudian set tail kurang 1 agar berpindah ke belakang pada data terakhir
         antrian.tail--;
-
-        cout << endl;
-        // setelah cetak bahwa data berhasil dihapus ke layar
-        cout << "***** Data dihapus *****" << endl;
     }
 
     cout << endl;
@@ -265,7 +260,6 @@ void printData()
             cout << "Tanggal lahir: " << antrian.data[i].tanggalLahir << endl;
             cout << "Status perkawinan: " << antrian.data[i].perkawinan << endl;
             cout << "Pekerjaan: " << antrian.data[i].pekerjaan << endl;
-            cout << "Asal : " << antrian.data[i].asal << endl;
             cout << endl;
         }
     }

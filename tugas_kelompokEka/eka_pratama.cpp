@@ -3,14 +3,14 @@
 // maksimal antrian adalah 5
 #define MAX_QUEUE 5
 
-using namespace std;
+using namespace std; // variabel input output
 
 // buat struct KTP untuk menyimpan data data yang ada pada ktp
 struct Penduduk
 {
     string NIK;
     string nama;
-    string tanggalLahir;
+    string alamatSaatIni;
     string status;
     string pekerjaan;
     string asal;
@@ -36,7 +36,7 @@ int isEmpty();
 // todo : mengecek data jika sudah penuh
 int isFull();
 
-void enQueue(string NIK, string nama, string tanggalLahir, string status, string pekerjaan, string asal);
+void enQueue(string NIK, string nama, string alamatSaatIni, string status, string pekerjaan, string asal);
 
 // todo : menghapus satu data antrian terdepan
 void deQueue();
@@ -51,28 +51,8 @@ void clear();
 void search(string posisi);
 
 // todo : menghitung total data pada antrian
-int totalData()
-{
-    // variabel total digunakan untuk menghitung total data pada antrian.
-    int total = 0;
+int totalData();
 
-    if (antrian.head = antrian.tail == -1) // jika antrian kosong yaitu head dan tail = -1
-    {
-        return total = 0; // maka kembalikan data total = 0
-    }
-    // jika  antrian terdapat data antrian  maka
-    else
-    {
-        // buat perulangan untuk mengitung data, gunakan perulangan for untuk menghitung data pada antrian dimana head sebagai data pertama dan tail  sebagai data terakhir
-        for (int i = antrian.head; i <= antrian.tail; i++)
-        {
-            // variabel total tambahkan 1
-            total += 1;
-        }
-        // kembalikan nilai total
-        return total;
-    }
-}
 int main(int argc, char const *argv[])
 {
     // inisiasi agar head dan tail di set ke -1
@@ -81,7 +61,7 @@ int main(int argc, char const *argv[])
     // deklarasikan variabel yang dibutuhkan
     string NIK;
     string nama;
-    string tanggalLahir;
+    string alamatSaatIni;
     string status;
     string pekerjaan;
     string menu;
@@ -93,19 +73,21 @@ int main(int argc, char const *argv[])
     {
         // kami menggunakan getline karena getline karena inputan yang lebih dari 1 kata
         cout << endl;
-        cout << "==========Program Queue=========" << endl;
-        cout << "1. Enqueue/menambahkan data KTP" << endl;
-        cout << "2. Dequeue/mengurangi data KTP" << endl;
-        cout << "3. Print data KTP" << endl;
-        cout << "4. Hapus seluruh data" << endl;
+        cout << "|=============================|" << endl;
+        cout << "|========Program Queue========|" << endl;
+        cout << "|=============================|" << endl;
+        cout << "1. Enqueue/menambahkan data penduduk" << endl;
+        cout << "2. Dequeue/mengurangi data penduduk" << endl;
+        cout << "3. Print data penduduk" << endl;
+        cout << "4. Hapus seluruh data penduduk" << endl;
         cout << "5. Cari data" << endl;
-        cout << "6. Jumlah data" << endl;
+        cout << "6. Jumlah data penduduk" << endl;
         cout << "7. Exit" << endl;
         cout << "pilih menu (1/2/3/4/5) : ";
-        //  getline digunakan untuk menangkap menu yang dipilih oleh user
+        //  getline digunakan untuk menangkap menu yang dipilih oleh user dan menyimpan ke dalam variabel menu
         getline(cin, menu);
 
-        // note : penggunaan getline digunakan untuk menangkap variabel string yang lebih dari 1 kata. untuk menu sendiri juga menggunakan getline karena, jika menggunakan cin, terdapat error saat input data dari user. yaitu variabel nik tidak bisa diisi dan langsung ke variabel nama. untukk mengatasi error tersebut semua  inputan dari user sya menggunakan fungsi getline(). Error kemudian bisa saya hilangkkan
+        // note : penggunaan getline digunakan untuk menangkap variabel string yang lebih dari 1 kata. untuk menu sendiri juga menggunakan getline karena, jika menggunakan cin, terdapat error saat input data dari user. yaitu variabel nik tidak bisa diisi dan langsung ke variabel nama. untukk mengatasi error tersebut semua  inputan dari user kami menggunakan fungsi getline(). Error/bug kemudian bisa kami atasi
 
         // ubah isi variabel menu dari string menjadi integer dan masukan ke variabel pilihan dengan type data integer. karena jika menggunakan variabel menu yang bertipe string dengan fungsi inputan menggunakan fungsi getline(), juga terjadi error. makanya saya parsing dahulu  dari string ke int dengan fungsi stoi.
         // fungsi stoi digunakan untuk mengubah string menjadi integer.
@@ -129,8 +111,8 @@ int main(int argc, char const *argv[])
                 getline(cin, NIK);
                 cout << "Nama: ";
                 getline(cin, nama);
-                cout << "Tanggal lahir: ";
-                getline(cin, tanggalLahir);
+                cout << "Alamat Saat Ini: ";
+                getline(cin, alamatSaatIni);
                 cout << "Status : ";
                 getline(cin, status);
                 cout << "Pekerjaan: ";
@@ -139,7 +121,7 @@ int main(int argc, char const *argv[])
                 getline(cin, asal);
 
                 // menjalankan fungsi enQueue / memasukan semua variabel yang telah diisi input user ke dalam parameter enQueue
-                enQueue(NIK, nama, tanggalLahir, status, pekerjaan, asal);
+                enQueue(NIK, nama, alamatSaatIni, status, pekerjaan, asal);
             }
             break;
 
@@ -216,8 +198,8 @@ int isFull()
         return 0;
     }
 }
-
-void enQueue(string NIK, string nama, string tanggalLahir, string status, string pekerjaan, string asal)
+//-----------// parameter
+void enQueue(string NIK, string nama, string alamatSaatIni, string status, string pekerjaan, string asal)
 {
     // jika antrian masih kosong dan ditambahkan data pertama
     if (isEmpty()) // cek jika data kosong
@@ -226,7 +208,7 @@ void enQueue(string NIK, string nama, string tanggalLahir, string status, string
         antrian.head = antrian.tail = 0;
         antrian.data[antrian.tail].NIK = NIK;
         antrian.data[antrian.tail].nama = nama;
-        antrian.data[antrian.tail].tanggalLahir = tanggalLahir;
+        antrian.data[antrian.tail].alamatSaatIni = alamatSaatIni;
         antrian.data[antrian.tail].status = status;
         antrian.data[antrian.tail].pekerjaan = pekerjaan;
         antrian.data[antrian.tail].asal = asal;
@@ -238,7 +220,7 @@ void enQueue(string NIK, string nama, string tanggalLahir, string status, string
         antrian.tail++;
         antrian.data[antrian.tail].NIK = NIK;
         antrian.data[antrian.tail].nama = nama;
-        antrian.data[antrian.tail].tanggalLahir = tanggalLahir;
+        antrian.data[antrian.tail].alamatSaatIni = alamatSaatIni;
         antrian.data[antrian.tail].status = status;
         antrian.data[antrian.tail].pekerjaan = pekerjaan;
         antrian.data[antrian.tail].asal = asal;
@@ -261,12 +243,12 @@ void deQueue()
     else
     {
         // gunakan for loop untuk membantu mmenghapus data pada antrian pertama
-        for (int i = antrian.head; i <= antrian.tail; i++)
+        for (int i = antrian.head; i <= antrian.tail - 1; i++)
         {
             // data pada index satu akan digantikan oleh data pada index kedua, data pada idex kedua akan digantikan oleh index ke tiga dan seterusnya
             antrian.data[i].NIK = antrian.data[i + 1].NIK;
             antrian.data[i].nama = antrian.data[i + 1].nama;
-            antrian.data[i].tanggalLahir = antrian.data[i + 1].tanggalLahir;
+            antrian.data[i].alamatSaatIni = antrian.data[i + 1].alamatSaatIni;
             antrian.data[i].status = antrian.data[i + 1].status;
             antrian.data[i].pekerjaan = antrian.data[i + 1].pekerjaan;
             antrian.data[i].asal = antrian.data[i + 1].asal;
@@ -302,8 +284,8 @@ void printData()
             cout << "========================" << endl;
             cout << "NIK: " << antrian.data[i].NIK << endl;
             cout << "Nama: " << antrian.data[i].nama << endl;
-            cout << "Tanggal lahir: " << antrian.data[i].tanggalLahir << endl;
-            cout << "Status status: " << antrian.data[i].status << endl;
+            cout << "Alamat saat ini: " << antrian.data[i].alamatSaatIni << endl;
+            cout << "Status : " << antrian.data[i].status << endl;
             cout << "Pekerjaan: " << antrian.data[i].pekerjaan << endl;
             cout << "Asal : " << antrian.data[i].asal << endl;
             cout << endl;
@@ -356,14 +338,14 @@ void search(string posisi)
         // jika angka - 1(dikurang 1 karena index dimulai dari nol agar tidak salah dalam pengkondisian) == i  maka,
         if (angka - 1 == i)
         {
-            // set bool = true,
+            // set bool = true, jika data ditemukan
             found = true;
 
             // lalu tampilkan data dengan index ke-i tersebut. karena i tersebut adalah data yang dicari oleh user sesuai parameter yang dikirim
             cout << "NIK: " << antrian.data[i].NIK << endl;
             cout << "Nama: " << antrian.data[i].nama << endl;
-            cout << "Tanggal lahir: " << antrian.data[i].tanggalLahir << endl;
-            cout << "Status status: " << antrian.data[i].status << endl;
+            cout << "Alamat saat: " << antrian.data[i].alamatSaatIni << endl;
+            cout << "Status: " << antrian.data[i].status << endl;
             cout << "Pekerjaan: " << antrian.data[i].pekerjaan << endl;
             cout << "Asal: " << antrian.data[i].asal << endl;
         }
@@ -375,4 +357,27 @@ void search(string posisi)
         cout << "|*****| DATA NOT FOUND |*****|" << endl;
     }
     cout << endl;
+}
+
+int totalData()
+{
+    // variabel total digunakan untuk menghitung total data pada antrian.
+    int total = 0;
+
+    if (antrian.head = antrian.tail == -1) // jika antrian kosong yaitu head dan tail = -1
+    {
+        return total = 0; // maka kembalikan data total = 0
+    }
+    // jika  antrian terdapat data antrian  maka
+    else
+    {
+        // buat perulangan untuk mengitung data, gunakan perulangan for untuk menghitung data pada antrian dimana head sebagai data pertama dan tail  sebagai data terakhir
+        for (int i = antrian.head; i <= antrian.tail; i++)
+        {
+            // variabel total tambahkan 1
+            total = total + 1;
+        }
+        // kembalikan nilai total
+        return total;
+    }
 }
